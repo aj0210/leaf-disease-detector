@@ -18,26 +18,8 @@ if choice=="About":
     intro_markdown = read_markdown_file("about.md")
     st.markdown(intro_markdown, unsafe_allow_html=True)
 elif choice=="Disease Detection":
-    original_title = '<p style="font-family:trebuchet ms; color:Black;text-align:center;font-size: 40px;">Grape Leaf Disease Diagnosis</p>'
-    st.markdown(original_title, unsafe_allow_html=True)
-
+    st.title("Grape Leaf Disease Diagnosis")
     file = st.file_uploader("Upload image...", type=["jpg", 'png'])
-
-    def add_bg_from_url():
-        st.markdown(
-            f"""
-             <style>
-             .stApp {{
-                 background-image: url("https://cdn.wallpapersafari.com/5/78/njrDYe.jpg");
-                 background-attachment: fixed;
-                 background-size: cover
-             }}
-             </style>
-             """,
-            unsafe_allow_html=True
-        )
-
-    add_bg_from_url()
     def import_and_predict(image_data, model):
         size = (256, 256)
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
@@ -52,8 +34,7 @@ elif choice=="Disease Detection":
 
 
     if file is None:
-        img_none = '<p style="font-family:trebuchet ms; color:Black;text-align:center;font-size: 20px;">Please upload an grape leaf image</p>'
-        st.markdown(img_none, unsafe_allow_html=True)
+        st.write("Please upload an grape leaf image")
     else:
         image = Image.open(file)
         st.sidebar.image(image, use_column_width=True)
